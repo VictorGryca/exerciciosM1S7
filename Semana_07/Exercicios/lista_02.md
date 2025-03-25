@@ -247,39 +247,55 @@ Pedidos de R$200,00 ou mais → "Frete grátis!"
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
 ______
 
-111
 
-
-```
-idade <- Entrada('Insira sua idade')
+```javascript
+//considerando que em sala, você, Kizzy, disse que poderiamos usar codigo normal nas partes que pede pseudocodigo 
+var valorCompra = 0
+if(valorCompra < 50){
+    console.log("Frete não disponível!")
+}
+else if(valorCompra > 50 && valorCompra <= 199.99){
+    console.log("Frete com custo adicional!")
+}
+else{
+    console.log("Frete Grátis!")
+}
  
- SE(idade menor que 16)
-    IMPRIMIR Não pode votar!
- 
- SENÃO 
-     SE(idade maior ou igual a 16 e menor que 18)
-         IMPRIMIR Voto facultativo!
-   
-     SENÃO
-         IMPRIMIR Voto obrigatório
-
 ```
 
 **8)** Considere a implementação da classe base Veiculo em um sistema de modelagem de veículos. Sua tarefa é implementar, utilizando pseudocódigo, as classes derivadas Carro e Moto, que herdam da classe Veiculo, adicionando atributos específicos e métodos para calcular o consumo de combustível de um carro e de uma moto, respectivamente.
 
-```
-Classe Veiculo:
-Atributos:
+```javascript
+class Veiculo {
+    constructor(velocidade, distanciaPercorrida, tempo, nPassageiros){
+        this.velocidade = velocidade
+        this.distanciaPercorrida = distanciaPercorrida
+        this.tempo = tempo
+        this.nPassageros = nPassageiros
+    }
 
-modelo
-ano
-Método Construtor(modelo, ano):
+    calculoVelocidade(){
+        velocidade = distanciaPercorrida/tempo
+        console.log("Velocidade: " + velocidade)
+    }
+}
 
-Define os valores dos atributos modelo e ano com os valores passados como parâmetro.
-Método CalcularConsumo():
+class Carro extends Veiculo {
+    constructor(distanciaPercorrida, tempo, nPassageiros, gasolinaGasta){
+        super(distanciaPercorrida, tempo, nPassageiros)
+        this.consumo = consumo
+    }
+
+    consumo(){
+        switch (nPassageiros){
+            case 0:
+                console.log("Ninguém esta dirigindo")
+            case 1:
+                console.log("Ninguém esta dirigindo")
+        }
+    }
+}
 ```
-Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
-Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
