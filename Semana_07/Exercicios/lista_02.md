@@ -267,34 +267,90 @@ else{
 
 ```javascript
 class Veiculo {
-    constructor(velocidade, distanciaPercorrida, tempo, nPassageiros){
-        this.velocidade = velocidade
+    constructor(distanciaPercorrida, tempo, nPassageiros){
+        this.velocidade = 0
         this.distanciaPercorrida = distanciaPercorrida
         this.tempo = tempo
-        this.nPassageros = nPassageiros
+        this.nPassageiros = nPassageiros
     }
 
     calculoVelocidade(){
-        velocidade = distanciaPercorrida/tempo
-        console.log("Velocidade: " + velocidade)
+        this.velocidade = this.distanciaPercorrida/this.tempo
+        console.log("Velocidade: " + this.velocidade)
     }
 }
 
 class Carro extends Veiculo {
     constructor(distanciaPercorrida, tempo, nPassageiros, gasolinaGasta){
         super(distanciaPercorrida, tempo, nPassageiros)
-        this.consumo = consumo
+        this.gasolinaGasta = gasolinaGasta
+        this.consumoCalculado = 0
     }
 
     consumo(){
-        switch (nPassageiros){
+        switch (this.nPassageiros){
             case 0:
-                console.log("Ninguém esta dirigindo")
+                console.log("Ninguém esta dirigindo o carro")
+                break
             case 1:
-                console.log("Ninguém esta dirigindo")
+                this.consumoCalculado = this.distanciaPercorrida/this.gasolinaGasta
+                console.log("Consumo para 1 pessoa: " + this.consumoCalculado + " km/l")
+                break
+            case 2:
+                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.9
+                console.log("Consumo para 2 pessoas: " + this.consumoCalculado + " km/l")
+                break
+            case 3:
+                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.8
+                console.log("Consumo para 3 pessoas: " + this.consumoCalculado + " km/l")
+                break
+            case 4:
+                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.7
+                console.log("Consumo para 4 pessoas: " + this.consumoCalculado + " km/l")
+                break
+            case 5:
+                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.6
+                console.log("Consumo para 5 pessoas: " + this.consumoCalculado + " km/l")
+                break
+            default:
+                console.log("Quantidade de parrageiros inválida.")
+            
         }
     }
 }
+
+class Moto extends Veiculo {
+    constructor(distanciaPercorrida, tempo, nPassageiros, gasolinaGasta){
+        super(distanciaPercorrida, tempo, nPassageiros)
+        this.gasolinaGasta = gasolinaGasta
+        this.consumoCalculado = 0
+    }
+
+    consumo(){
+        switch (this.nPassageiros){
+            case 0:
+                console.log("Ninguém esta dirigindo a moto")
+                break
+            case 1:
+                this.consumoCalculado = this.distanciaPercorrida/this.gasolinaGasta
+                console.log("Consumo para 1 pessoa: " + this.consumoCalculado + " km/l")
+                break
+            case 2:
+                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.6
+                console.log("Consumo para 2 pessoas: " + this.consumoCalculado + " km/l")
+                break
+            default:
+                console.log("Quantidade de parrageiros inválida.")
+            
+        }
+    }
+}
+
+//Teste das classes
+const onix = new Carro(2, 1, 5, 1)
+onix.consumo();
+const honda = new Moto(2,1,2,1)
+honda.consumo()
 ```
 ______
 
@@ -305,8 +361,44 @@ Entretanto, a sonda não pode ultrapassar um tempo máximo de descida para evita
 Implemente a lógica dessa simulação em pseudocódigo, considerando a seguinte equação para atualização da velocidade:
 
 Considere a fórumla de atualização velocidade:
-```
-    velocidade = velocidadeInicial - desaceleracao * tempo
+```javascript
+//Considerando que, em sala, a Kizzy falou que podia usar JavaScript
+    function calcularTempoDeDesaceleracao({
+    velocidadeInicial,
+    velocidadeSegura,
+    desaceleracao,
+    tempoMaximo,
+    desaceleracaoMinima,
+    desaceleracaoMaxima
+  }) {
+    if (desaceleracao < desaceleracaoMinima || desaceleracao > desaceleracaoMaxima) {
+      return `Erro: A desaceleração (${desaceleracao} m/s²) está fora dos limites permitidos (${desaceleracaoMinima} - ${desaceleracaoMaxima} m/s²).`;
+    }
+  
+    const tempo = (velocidadeInicial - velocidadeSegura) / desaceleracao;
+  
+    if (tempo > tempoMaximo) {
+      return `Erro: O tempo necessário (${tempo.toFixed(2)}s) ultrapassa o tempo máximo permitido (${tempoMaximo}s).`;
+    }
+  
+    if (tempo < 0) {
+      return `Erro: A velocidade segura já foi atingida ou os parâmetros estão incorretos.`;
+    }
+  
+    return `Tempo necessário para atingir velocidade segura: ${tempo.toFixed(2)} segundos.`;
+  }
+  
+  const resultado = calcularTempoDeDesaceleracao({
+    velocidadeInicial: 3200,
+    velocidadeSegura: 10,
+    desaceleracao:10,
+    tempoMaximo: 300,
+    desaceleracaoMinima: 10,
+    desaceleracaoMaxima: 100
+  });
+  
+  console.log(resultado);
+  
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
 ______
@@ -315,29 +407,34 @@ ______
 
 A seguir, é fornecida a implementação da função SomarMatrizesInvestimento(matrizA, matrizB), que soma os valores de duas matrizes de investimento. Sua tarefa é implementar uma função semelhante, porém que realize a multiplicação das matrizes de investimento, determinando como os investimentos afetam os resultados ao longo do tempo.
 
-```
-Função SomarMatrizesInvestimento(matrizA, matrizB):  
-    # Verifica se as matrizes têm o mesmo número de linhas e colunas  
-    Se tamanho(matrizA) ≠ tamanho(matrizB) então:  
-        Retornar "As matrizes não podem ser somadas. Elas têm dimensões diferentes."  
-    Senão:  
-        linhas <- tamanho(matrizA)  
-        colunas <- tamanho(matrizA[0])  
-        matrizResultado <- novaMatriz(linhas, colunas)  
+```javascript
+function MultiplicarMatrizesInvestimento(A, B){
 
-        # Loop para percorrer cada elemento das matrizes e calcular a soma  
-        Para i de 0 até linhas-1 faça:  
-            Para j de 0 até colunas-1 faça:  
-                matrizResultado[i][j] <- matrizA[i][j] + matrizB[i][j]  
+    const linhasA = A.length;
+    const colunasA = A[0].length;
+    const linhasB = B.length;
+    const colunasB = B[0].length;
+  
+    if (colunasA !== linhasB) {
+      console.log("Número de colunas da Matriz A deve ser igual ao número de linhas da Matriz B.");
+    }
+  
+    const resultado = new Array(linhasA).fill(0).map(() => new Array(colunasB).fill(0));
+  
+    for (let i = 0; i < linhasA; i++) {
+      for (let j = 0; j < colunasB; j++) {
+        for (let k = 0; k < colunasA; k++) {
+          resultado[i][j] += A[i][k] * B[k][j];
+        }
+      }
+    }
+  
+    console.log(resultado);
 
-        Retornar matrizResultado  
+}
 
-# Exemplo de uso da função  
-investimentosAno1 <- [[1000, 2000], [1500, 2500]]  
-investimentosAno2 <- [[1200, 1800], [1300, 2700]]  
-
-totalInvestimentos <- SomarMatrizesInvestimento(investimentosAno1, investimentosAno2)  
-Escrever("Total de investimentos acumulados:")  
-ImprimirMatriz(totalInvestimentos)  
+const matrizA = [[1,2],[3,4],[5,6]]
+const matrizB = [[7,8,9,10],[11,12,13,14]]
+MultiplicarMatrizesInvestimento(matrizA, matrizB)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.

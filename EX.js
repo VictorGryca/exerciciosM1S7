@@ -1,86 +1,29 @@
-class Veiculo {
-    constructor(distanciaPercorrida, tempo, nPassageiros){
-        this.velocidade = 0
-        this.distanciaPercorrida = distanciaPercorrida
-        this.tempo = tempo
-        this.nPassageiros = nPassageiros
-    }
 
-    calculoVelocidade(){
-        this.velocidade = this.distanciaPercorrida/this.tempo
-        console.log("Velocidade: " + this.velocidade)
-    }
-}
+function MultiplicarMatrizesInvestimento(A, B){
 
-class Carro extends Veiculo {
-    constructor(distanciaPercorrida, tempo, nPassageiros, gasolinaGasta){
-        super(distanciaPercorrida, tempo, nPassageiros)
-        this.gasolinaGasta = gasolinaGasta
-        this.consumoCalculado = 0
+    const linhasA = A.length;
+    const colunasA = A[0].length;
+    const linhasB = B.length;
+    const colunasB = B[0].length;
+  
+    if (colunasA !== linhasB) {
+      console.log("Número de colunas da Matriz A deve ser igual ao número de linhas da Matriz B.");
     }
-
-    consumo(){
-        switch (this.nPassageiros){
-            case 0:
-                console.log("Ninguém esta dirigindo o carro")
-                break
-            case 1:
-                this.consumoCalculado = this.distanciaPercorrida/this.gasolinaGasta
-                console.log("Consumo para 1 pessoa: " + this.consumoCalculado + " km/l")
-                break
-            case 2:
-                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.9
-                console.log("Consumo para 2 pessoas: " + this.consumoCalculado + " km/l")
-                break
-            case 3:
-                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.8
-                console.log("Consumo para 3 pessoas: " + this.consumoCalculado + " km/l")
-                break
-            case 4:
-                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.7
-                console.log("Consumo para 4 pessoas: " + this.consumoCalculado + " km/l")
-                break
-            case 5:
-                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.6
-                console.log("Consumo para 5 pessoas: " + this.consumoCalculado + " km/l")
-                break
-            default:
-                console.log("Quantidade de parrageiros inválida.")
-            
+  
+    const resultado = new Array(linhasA).fill(0).map(() => new Array(colunasB).fill(0));
+  
+    for (let i = 0; i < linhasA; i++) {
+      for (let j = 0; j < colunasB; j++) {
+        for (let k = 0; k < colunasA; k++) {
+          resultado[i][j] += A[i][k] * B[k][j];
         }
+      }
     }
+  
+    console.log(resultado);
+
 }
 
-class Moto extends Veiculo {
-    constructor(distanciaPercorrida, tempo, nPassageiros, gasolinaGasta){
-        super(distanciaPercorrida, tempo, nPassageiros)
-        this.gasolinaGasta = gasolinaGasta
-        this.consumoCalculado = 0
-    }
-
-    consumo(){
-        switch (this.nPassageiros){
-            case 0:
-                console.log("Ninguém esta dirigindo a moto")
-                break
-            case 1:
-                this.consumoCalculado = this.distanciaPercorrida/this.gasolinaGasta
-                console.log("Consumo para 1 pessoa: " + this.consumoCalculado + " km/l")
-                break
-            case 2:
-                this.consumoCalculado = (this.distanciaPercorrida/this.gasolinaGasta)*0.6
-                console.log("Consumo para 2 pessoas: " + this.consumoCalculado + " km/l")
-                break
-            default:
-                console.log("Quantidade de parrageiros inválida.")
-            
-        }
-    }
-}
-
-const onix = new Carro(2, 1, 5, 1)
-onix.consumo();
-const honda = new Moto(2,1,2,1)
-honda.consumo()
-
-
+const matrizA = [[1,2],[3,4],[5,6]]
+const matrizB = [[7,8,9,10],[11,12,13,14]]
+MultiplicarMatrizesInvestimento(matrizA, matrizB)
