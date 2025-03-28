@@ -265,6 +265,20 @@ else{
 
 **8)** Considere a implementação da classe base Veiculo em um sistema de modelagem de veículos. Sua tarefa é implementar, utilizando pseudocódigo, as classes derivadas Carro e Moto, que herdam da classe Veiculo, adicionando atributos específicos e métodos para calcular o consumo de combustível de um carro e de uma moto, respectivamente.
 
+```
+Classe Veiculo:
+Atributos:
+
+modelo
+ano
+Método Construtor(modelo, ano):
+
+Define os valores dos atributos modelo e ano com os valores passados como parâmetro.
+Método CalcularConsumo():
+```
+Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
+Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+
 ```javascript
 class Veiculo {
     constructor(distanciaPercorrida, tempo, nPassageiros){
@@ -361,6 +375,11 @@ Entretanto, a sonda não pode ultrapassar um tempo máximo de descida para evita
 Implemente a lógica dessa simulação em pseudocódigo, considerando a seguinte equação para atualização da velocidade:
 
 Considere a fórumla de atualização velocidade:
+```
+    velocidade = velocidadeInicial - desaceleracao * tempo
+```
+Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
+
 ```javascript
 //Considerando que, em sala, a Kizzy falou que podia usar JavaScript
     function calcularTempoDeDesaceleracao({
@@ -400,12 +419,38 @@ Considere a fórumla de atualização velocidade:
   console.log(resultado);
   
 ```
-Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
 ______
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
 
 A seguir, é fornecida a implementação da função SomarMatrizesInvestimento(matrizA, matrizB), que soma os valores de duas matrizes de investimento. Sua tarefa é implementar uma função semelhante, porém que realize a multiplicação das matrizes de investimento, determinando como os investimentos afetam os resultados ao longo do tempo.
+
+```
+Função SomarMatrizesInvestimento(matrizA, matrizB):  
+    # Verifica se as matrizes têm o mesmo número de linhas e colunas  
+    Se tamanho(matrizA) ≠ tamanho(matrizB) então:  
+        Retornar "As matrizes não podem ser somadas. Elas têm dimensões diferentes."  
+    Senão:  
+        linhas <- tamanho(matrizA)  
+        colunas <- tamanho(matrizA[0])  
+        matrizResultado <- novaMatriz(linhas, colunas)  
+
+        # Loop para percorrer cada elemento das matrizes e calcular a soma  
+        Para i de 0 até linhas-1 faça:  
+            Para j de 0 até colunas-1 faça:  
+                matrizResultado[i][j] <- matrizA[i][j] + matrizB[i][j]  
+
+        Retornar matrizResultado  
+
+# Exemplo de uso da função  
+investimentosAno1 <- [[1000, 2000], [1500, 2500]]  
+investimentosAno2 <- [[1200, 1800], [1300, 2700]]  
+
+totalInvestimentos <- SomarMatrizesInvestimento(investimentosAno1, investimentosAno2)  
+Escrever("Total de investimentos acumulados:")  
+ImprimirMatriz(totalInvestimentos)  
+```
+Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
 
 ```javascript
 function MultiplicarMatrizesInvestimento(A, B){
@@ -437,4 +482,3 @@ const matrizA = [[1,2],[3,4],[5,6]]
 const matrizB = [[7,8,9,10],[11,12,13,14]]
 MultiplicarMatrizesInvestimento(matrizA, matrizB)  
 ```
-Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
